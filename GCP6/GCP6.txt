@@ -1,0 +1,49 @@
+51.PV and PVC
+Persistent volume: 
+persistent volume claim:
+PVs are independent storage volumes that can be provisioned from different storage providers such as cloud storage or on-premise storage systems, and PVCs are used to request 
+storage resources from the PVs. The PVs and PVCs allow you to abstract the underlying storage infrastructure from your application, providing a layer of indirection. You can use 
+PVs and PVCs to store data persistently, even if a Pod is deleted or restarted. PVs and PVCs can be used with different storage backends like NFS, iSCSI, Ceph, etc
+
+
+52. How do you monitor kubernetes cluster
+
+graphana, prometheus, kibana
+
+
+53. why should we use custom namespaces
+we can isolation our environment in variour object in k8 pod, deployment ,service etc.
+
+54. config map and secretes and how we can use in deployments
+	Config MAP : 
+		a.	A ConfigMap in Kubernetes is an object that allows you to store non-sensitive configuration data in key-value pairs. It can be used to manage configuration data for your applications and services running in the cluster, enabling them to be easily configured without modifying the application code or redeploying containers.
+		b.	From Literal Key-Value Pairs: kubectl create configmap my-config --from-literal=key1=value1 --from-literal=key2=value2
+		c.	From a File : You can create a ConfigMap from the contents of a file. For example, if you have a configuration file app-config.properties:
+		kubectl create configmap my-config --from-file=app-config.properties
+		d.	From a Directory : You can also create a ConfigMap from a directory. Each file in the directory will be treated as a key, and the content of the file will be the value.
+
+kubectl create configmap my-config --from-file=/path/to/config/directory
+
+	Secretes: 
+		Secretes is an k8 object, which helps to store sensitive informations such as passwords, tokens or API keys
+
+
+To storing 
+
+55. how to troubleshoot pods get failes and what are the error how to fix 
+	kubectl describe 
+56. what happen whe the master or the worker node fail?
+	If worker nodes fail, pods will be stop working since worker node offline. 
+	
+57. CICD interview scenario based questions
+58. terraform state how to unlock state , tf taint
+	
+59. terraform import backend
+	terraform import command 
+60. how to delete particular resouces in tf
+	Target  command we can use
+61. how to set priority in tf
+	depends_on
+	
+62, tf workspaces and how to use same code for diff env
+	We can use standard module 
