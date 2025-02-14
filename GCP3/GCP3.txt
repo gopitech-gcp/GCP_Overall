@@ -1,0 +1,54 @@
+21. What is purpose of RUN, Copy, Entry point, CMD
+
+RUN - it will execute during the image build
+COPY - copy the file from current directory
+ENTRYPOINT - Default executable for the containers
+CMD -default executable param , be overridden during container runtime. If there are multiple CMD instructions in a Dockerfile, only the last one will take effect.
+
+
+22. Docker compose?
+
+	Docker Compose is a tool for defining and running multi-container Docker applications. It allows you to use a simple YAML file (called docker-compose.yml) to define the services, networks, and volumes required for your application and then spin up the entire application stack with a single command.
+	
+	
+23. How to use smame state of docker file in one VM to another VM?
+
+	we can use any registry or SCP command
+	
+24. Virtualization and containeration differ?
+	Virtualization involves running multiple virtual machines (VMs) on a single physical server, each with its own complete operating system. This results in higher resource overhead and longer boot times compared to containerization.
+
+Containerization, on the other hand, involves running multiple lightweight containers on a single host, all sharing the host OS kernel. Containers are more resource-efficient, start much faster, and are highly portable compared to VMs.
+
+While VMs provide strong isolation between instances, containers provide process-level isolation, making them lighter and faster to start.
+
+	
+25. Docker comit purpose?
+	docker commit we can collebrating to work with all 
+	
+	The docker commit command is used to create a new Docker image from changes made to a container. It's mainly used when you want to capture changes made to a container's filesystem as a new image, which can be reused to create new containers or shared with others.
+
+26. Hard reset and soft reset in git?
+		hard is a Git command used to reset the current branch to a previous commit, discarding any local changes and modifications made to the file
+		soft reset  that a soft git reset does not revert staged or working tree files back to a previous state
+		
+27. Can a container restart by itself?
+		it won't restart automatically
+		we have to define below command
+		docker run --restart=always
+		
+		
+28. Can we use Json instead of YAML while developing docker-compose file in Docker?
+	yes we can use
+	
+29. k8 Architecture?
+      GKE version : 1.29.12
+      32 worker nodes
+
+	
+30. Deployment startegy and what is method have you used?
+		Rolling update
+		Recreate 
+		canary deployment
+		blue greeen deployment
+		
