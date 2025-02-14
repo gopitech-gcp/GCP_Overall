@@ -1,0 +1,110 @@
+11. what is vertex AI is in google cloud
+		Overall, Vertex AI streamlines the process of developing, deploying, and maintaining ML models, making it an invaluable tool for any machine learning project."
+		
+		
+12. Name some of the main security aspectes offeered by google cloud?
+		IAM, CLoud Armor, ACL, KMS, Network security
+		IAM : 
+			IAM helps you manage who has access to GCP resources and what actions they can perform. It uses roles and permissions to control access
+		
+		cloud Armor : 
+			Google Cloud Armor is a security service provided by Google Cloud Platform that helps protect your applications and services from various types of attacks, particularly DDoS (Distributed Denial of Service) attacks and other web application vulnerabilities. Here’s an overview of its key features and functionalities:
+				DDos Attach, web application firwall
+				
+				we can define security policy with IP ranges , geo locations. 
+		ACL : 
+			Purpose: ACLs are used to control access to network resources, such as storage buckets, VMs, and other Google Cloud services. They can define who can access certain resources and 
+      what actions they can perform.
+		KMS : 
+			KMS is a fully managed service that enables you to create, use, and manage cryptographic keys for your cloud services. It helps you protect sensitive data using encryption.
+		google managed encryption key, customer managed encryption, clien side encryption key
+				
+		
+13. Expalin GCP architect
+		our GCP projects
+		
+14. Org policy based questions and folder level policy and project level policy
+		constraint\compute.vmExternalIP
+		restric the organization to deny using the external ip in the VM
+		
+		Lower level policy can overrite the higher level policy
+		
+15. pub/sub , cloud function , log sink how to create gcs for logs
+		pub/sub:
+			Pub/Sub is a versatile messaging service that can be used in various scenarios such as real-time data ingestion, microservices communication, stream processing, 
+asynchronous workflows, event-driven architectures, data replication, notifications, and task distribution. Its flexibility and scalability make it suitable for building complex and scalable distributed systems.
+			
+			create topic
+			under topic create publisher and subscriber
+			
+			once publisher published the message , using push method it will push message to subscriber
+			here subscriber we can say like
+			
+		cloud function : 
+			Absolutely. Cloud Functions are serverless functions offered by Google Cloud Platform. They allow developers to write and deploy code that responds to various events without managing servers.
+			
+			Cloud Functions are triggered by events from various Google Cloud services like Cloud Storage, Pub/Sub, Firestore, HTTP requests, etc. When an event occurs, the associated function is executed
+16. pub/sub is push or pull back?
+		both method we can use
+		
+17. Differ b/w cloud run and cloud function and VPC service controller?
+		Cloud Run:
+      It is a fully managed serverless platform provided by Google Cloud Platform (GCP) that allows you to run containerized applications without worrying about infrastructure management
+		Cloud Function:
+		  Cloud Functions are triggered by events from various Google Cloud services like Cloud Storage, Pub/Sub, Firestore, HTTP requests, etc. When an event occurs, the associated function is executed
+		VPC Service Controller : 
+      The VPC Service Controls feature in Google Cloud Platform (GCP) is a security tool designed to help protect sensitive data and mitigate the risk of data exfiltration within Google Cloud services
+
+      we have create perimeter on our VPC network , you to define and enforce security perimeters around your Google Cloud VPC networks,
+ensuring that services and resources within the perimeter can only communicate with each other or other allowed resources.
+      
+18. differ b/w app engine and cloud function?
+		App engine is platform as a service, its a language specific runtime
+			i)there is two type standard and flexiable . Standard will give few language support. Flexible give more language support.4
+			ii)There is some build-in services like memcache, cloud firestore to storage and management
+			iii)Deploy multiple versioning and split traffic between them
+			iv)
+			
+			
+		
+		Clud function:
+			i) Cloud function is a Fuction as a service. Event based trigger from one service to another service
+			ii)When event occurs , the associated fuction will trigger. for eg whenever there is data created in cloud storage bucket , it will trigger to associates service
+		
+		
+19. Can we use docker image in app engine?
+		yes we can use in app engine flexible environment
+
+
+20. Docker file creation?
+		FROM: nginx:1.18
+		WORKDIR: /usr/
+		
+		
+		From - The base image to use
+● Run - Runs commands when building 
+the docker image
+● Workdir - Specifies the directory that 
+commands are run from
+● User - Switches users
+● Copy - Copies Files (Copies local files and directories)
+ADD : it will copy the URL specific or direct (ADD https://example.com/file.tar.gz /tmp/)
+● CMD - Runs commands when 
+running the container
+
+
+Docker build -t nginxdev .
+docker run -t nginxdev bash
+docker image ls
+docker push imagename 
+
+docker volume create myvolume
+docker run -v myvolume:/data mynginx 
+docker rmi nginx
+
+
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install -y nginx
+CMD nginx service restart
+EXPOSE 80
