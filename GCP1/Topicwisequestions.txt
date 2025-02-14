@@ -1,0 +1,71 @@
+1. Self intro
+2. Explain about current projects
+3. what are the technologies and tool you used?
+4. Instance group , healt check, unmanaged instance group
+   Instance group: Identical VM
+   Health check : health checks are used to monitor the status and availability of resources such as virtual machines,
+load balancers, or services. Health checks can help ensure that traffic is only directed to healthy resources. 
+
+
+
+5. Certificates , KMS , Secretes
+	Certificates:
+		GCP provides a comprehensive set of tools and services for managing certificates, ensuring secure communications, and managing identities. 
+Whether you need to issue private certificates, manage SSL/TLS certificates for web applications, or secure internal communications, GCP has services designed to meet these needs.
+			1. Google Cloud certificates authority Services
+			2. Google cloud Managed Service for microsoft Active directory
+			3. Google cloud KMS
+			4. Google cloud load balancing with SSL/TLS
+			5. CLoud Armor
+	KMS : Key management services
+			Google Cloud KMS provides a robust and secure way to manage cryptographic keys, helping you protect sensitive data across your cloud environment.
+      * Google Managed Encryption Key
+      * Customer Mangaged Encryption Key
+      * Customer Supplied Encryption Key
+	Secretes: 	
+			Use Cases:
+			Storing API keys, database credentials, and other sensitive information.
+			Managing secrets for applications running on GCP.
+			Implementing secret rotation policies for enhanced security
+6. Type of load balancer , backend, healt check
+	Https Load Load balancer : Layer 7(Application Layer)
+  Networking Load balancer : Layer 4 (Transport Layer)
+	
+	
+7. Forward proxy and reverse proxy
+	Fordward Proxy:
+  * A proxy server acts as an intermediary between a client and the internet,often used for security, caching, and content filtering
+		Forward proxy is nothing but setting proxy in client side , there will be certain restriction to internet hiding identity and block web sites
+		HSBC laptop bloking some webesites, its forward proxy
+			A forward proxy is positioned between clients and the internet. It acts on behalf of clients, forwarding their requests to servers on the internet. 
+One of its primary functions is to provide anonymity and privacy by masking the client's IP address. For example, in a corporate environment, a forward proxy can enforce internet usage policies by blocking access to specific websites and can cache frequently accessed content to save bandwidth and reduce latenc
+		
+	Reverse proxy:
+		On the other hand, a reverse proxy sits between the internet and backend servers. It acts on behalf of the servers, receiving client requests, forwarding them to the appropriate backend server,
+		
+8. TCP and UDP load balancer where we can use?
+	TCP : it operate on layer 4 (transport layer)and designed to handle TCP connections, they balance traffic based on IP address and ports.
+        TCP ensures reliable delivery of data by establishing a connection before data is sent. It’s like sending a package with a tracking number.
+	UDP : User Datagram protocol wehere we reuqired connectionless communiction like audio and video where we required low latency and some pocket loss.
+	
+		
+9. what is TPU and GCPU?
+		TPU:  (deep leraning)
+			TPUs are highly optimized for TensorFlow operations, providing significant speed-ups for training and inference tasks in deep learning models
+			TPUs offer high throughput and efficiency for large-scale machine learning models. They are designed to handle the demanding computations of neural networks with low latency.
+		GCP: (machine learning)
+			GPUs are hardware accelerators traditionally used for rendering graphics but are now widely used for accelerating machine learning computations due to their parallel processing capabilities.
+10. IAM , cloud armor, GCS , ACL , Artifact registry
+		IAM : 
+			Setting a policy at the organization level applies it globally across all folders, projects, and resources within the organization. Setting the folder level applies it only to that specific folder and all contained projects and resources. Folder-level policies can override organization-level policies if set more restrictively.a policy at 
+		Can you provide an example of how you would restrict the creation of certain types of resources using organization policies?
+		Example:
+		To restrict the creation of VMs with GPUs, you could use the following constraint:
+
+		Constraint: constraints/compute.vmCanIpForward
+		Enforcement: Deny
+		This policy can be applied at the organization or folder level, preventing the creation of VMs that can forward IP traffic.
+		
+
+			
+		
