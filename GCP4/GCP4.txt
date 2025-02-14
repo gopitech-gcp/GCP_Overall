@@ -1,0 +1,140 @@
+31. Private cluster and public cluster
+
+	Public: 
+		In a public cluster, the Kubernetes API server and nodes have public IP addresses, making them accessible from the internet. This is suitable for applications that need to communicate with external services.
+		
+	private : 
+		In a private cluster, the Kubernetes API server and nodes have only internal IP addresses, providing an additional layer of security by isolating them from the public internet.
+Applications in a private cluster can access external services through NAT gateways or Cloud NAT.
+		
+32. Regional and zonal cluster?
+	Regional Cluster: 
+		A regional cluster is deployed across multiple zones within a Google Cloud region. The control plane is also distributed across these zones for increased resilience.
+	
+	Zonal Cluster : 
+		A zonal cluster is a GKE cluster that is deployed in a single zone within a Google Cloud region. All the cluster’s resources (nodes, control plane, etc.) reside in that one zone.
+		
+33. HPA and VPA
+	Horizontal pod Autoscaler
+		it will increase the number of pods based on the metric CPU, mememory
+          apiVersion: autoscaling/v2
+          kind: HorizontalPodAutoscaler
+          metadata:
+            name: my-app-hpa
+            namespace: default  # Change this to your specific namespace
+          spec:
+            scaleTargetRef:
+              apiVersion: apps/v1
+              kind: Deployment  # This can also be ReplicaSet, StatefulSet, etc.
+              name: my-app-deployment  # Name of the Deployment to scale
+            minReplicas: 2  # Minimum number of replicas
+            maxReplicas: 10  # Maximum number of replicas
+            metrics:
+              - type: Resource
+                resource:
+                  name: cpu  # The metric you want to scale on (could be CPU, memory, etc.)
+                  target:
+                    type: Utilization
+                    averageUtilization: 50  # Target CPU utilization (in percentage)
+
+	
+	Vertical Pod Autoscaler:
+		it will increase the resource limit
+        apiVersion: autoscaling.k8s.io/v1
+        kind: VerticalPodAutoscaler
+        metadata:
+          name: my-app-vpa
+          namespace: default  # Specify your namespace
+        spec:
+          targetRef:
+            apiVersion: apps/v1
+            kind: Deployment  # This can also be StatefulSet, ReplicaSet, etc.
+            name: my-app-deployment  # Name of the Deployment to apply VPA to
+          updatePolicy:
+            updateMode: "Auto"  # Can be "Auto", "Initial", or "Off"
+          resourcePolicy:
+            containerPolicies:
+            - containerName: my-app-container  # The name of the container within the pod
+              minAllowed:
+                cpu: 200m  # Minimum CPU resources allowed
+                memory: 256Mi  # Minimum memory resources allowed
+              maxAllowed:
+                cpu: 2  # Maximum CPU resources allowed
+                memory: 2Gi  # Maximum memory resources
+
+	  
+34. what is microservices?
+		splitting multiple services for single applications, easily isolate the dependecy and manage and deploy
+		
+35. Taint tolerence and node selector?
+	Node Selector : 
+		Node selector is a simple mechanism deploy the pod to particular node
+	Taint Tolerence :
+		Taint is applied to Node based on key value pair
+		Tolerations are applied to pods and allow them to be scheduled onto nodes with matching taints. A toleration consists of the same three parts: key, value, and effect. When a pod tolerates a taint, it can be scheduled on nodes that have that taint
+				
+		NoShedule      : Pods that do not tolerate the taint will not be scheduled on the node
+		PreferNoSchedule : Kubernetes will try to avoid scheduling pods that do not tolerate the taint, but it is not a hard requirement
+		NoExecute      : Pods that do not tolerate the taint will be evicted from the node if they are already running.
+
+36. Explain node and pod affinity?
+		In Kubernetes, node affinity and pod affinity are concepts that help control how pods are scheduled onto nodes based on specific criteria. They provide mechanisms to influence pod placement and ensure that your workloads run optimally according to your architectural needs.
+		
+	Node Affinity : (( Run only on GPU nodes))
+	   Node affinity allows you to constrain which nodes your pods can be scheduled on based on labels assigned to the nodes. It’s similar to nodeSelector but offers more expressive capabilities.
+	   Types of Node Affinity
+		i)RequiredDuringSchedulingIgnoredDuringExecution: This type of affinity specifies that the scheduler must place the pod on a node that matches the affinity rules. If no suitable node is available, the pod will not be scheduled.
+		ii)PreferredDuringSchedulingIgnoredDuringExecution: This type specifies that the scheduler will prefer to place the pod on a node that matches the affinity rules, but if no suitable node is found, the pod may still be scheduled elsewhere.
+
+	Pod Affinity:(( Example: Keep frontend and backend pods on the same node))
+		Pod affinity allows you to specify rules about which pods should be scheduled together on the same node or in the same topology domain (such as a zone or a region). This is useful for scenarios where you want to ensure certain pods are co-located for performance or communication reasons.
+		
+	Types of Pod Affinity : ((Spread replicas across nodes for high availability))
+       i)RequiredDuringSchedulingIgnoredDuringExecution: The scheduler must place the pod on a node where the specified pods are already running. If no such node exists, the pod will not be scheduled.
+
+       ii)PreferredDuringSchedulingIgnoredDuringExecution: The scheduler will try to place the pod on a node where the specified pods are running, but it can still schedule the pod elsewhere if no suitable node is found.
+	   
+
+Type	What it matches	Example Purpose
+Pod Affinity	   : Pods like being near specific pods	Run web pods near cache pods for low latency
+Pod Anti-Affinity  : Pods avoid being near specific pods	Spread replicas across nodes for HA
+Node Affinity	   : Pods like specific nodes	Use nodes with GPUs for ML workloads
+
+37. Deamon set and eplain how we can store k8 logs in datadog?
+		DaemonSets are essential for running background services on every node in your GKE cluster. They simplify the deployment of essential services that need to operate on all nodes, such as logging and monitoring agents. 
+		
+		
+
+38. How to store k8 logs in biquery?
+		Using create sink logs on cloud logging
+
+39. k8 commands
+		kubectl get deployments
+		kubectl scale deployment mydeployment --replicas=5
+		
+
+40. SErvices, Ingress, N/w policies
+		Service : 
+			it will provide unique static ip , we can send request to set of pods
+		Ingress: 
+		Ingress is a powerful way to manage external access to your Kubernetes services, providing routing, load balancing, and SSL termination capabilities.
+
+apiVersion: networking.k8.io/v1
+kind: Ingress
+metadata:
+	name: egressrule
+	annotation: 
+spec:
+	rules:
+	-host: example.com
+	 http:
+		paths:
+			-path: /service1
+			 pathType: prefix
+			 backend:
+			  service:
+				name: service1
+				port:
+				 number: 80
+				 
+				 
