@@ -1,0 +1,75 @@
+41. how to restrict access between node and pods?
+	we can use node affinity or pod affinity
+  Node Affinity is a powerful feature that allows you to control where your pods are scheduled based on the characteristics of the nodes. By using node affinity, you can:
+
+Schedule pods on nodes with specific resources, such as GPU or SSD.
+Create rules that require or prefer nodes with certain labels.
+Combine required and preferred node affinity to control scheduling behavior in a flexible manner.
+	
+42. Init container , sidecar container, static pod. 
+	Init Containers: Run before the main containers to perform initialization tasks and ensure preconditions are met.
+	Sidecar Containers: Run alongside the main containers to extend functionality, such as logging, monitoring, or proxying.
+	Static Pods: Managed directly by the kubelet on a specific node and used for critical components that don’t require scheduling.
+
+43. Are we able to acess if kublet fails or crashed or not working?
+		Yes, there are multiple ways to determine if the kubelet has failed, crashed, or is not working as expected.
+The kubelet is critical for node operation in Kubernetes, as it manages the lifecycle of pods on that node.
+		
+44. Auto scaling in k8
+		HPA, VPA
+45. How do you monitor kubernets cluster?
+	we can use monitoring tools like prometheus and grafana
+	
+46. RBAC
+	Role based authentication control
+	
+	apiVersion: rabac.authorization.k8.io/v1
+	kind: Role
+	metadata:
+		namespace: default
+		name: developer
+	rules:
+		rules:
+- apiGroups: [""] # "" indicates the core API group
+  resources: ["pods"]
+  verbs: ["get", "watch", "list"]
+  
+  
+47. Name space, resource quota
+	NameSpace : 
+		its feature in k8 where we can isolate our environment with networking , storage , permissions
+
+48. probes in details
+	liveness - The liveness probe checks whether your application is alive and running. If the liveness probe fails, Kubernetes will restart the container 
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+	readiness -The readiness probe determines if your application is ready to accept traffic. Unlike the liveness probe, the readiness probe does not restart the container. Instead, it controls whether the container is included in the service load balancing.
+	
+readinessProbe:
+  httpGet:
+    path: /readiness
+    port: 8080
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+Startup Probe: Checks whether the container has started successfully. This is useful for applications that take a long time to start, preventing unnecessary restarts by Kubernetes during startup.
+
+
+49. Multi cluster and how we can create communication between two cluster?
+	we can use several way
+	
+	federaton , service mesh, VPC peering
+	
+50. SErvice mesh and istio
+		A service mesh is an architectural pattern that provides a dedicated infrastructure layer for managing service-to-service communication in microservices applications. It typically handles a variety of concerns such as traffic management, security, observability, and resilience without requiring changes to the application code.
+		
+		Istio is one of the most popular open-source service mesh implementations. It provides a comprehensive set of features to manage microservices communication and enhance observability, security, and traffic control.
