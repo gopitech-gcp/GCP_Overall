@@ -1,0 +1,32 @@
+1. Git Cherrypick
+	we have two kind of branch like below , now you want to new branch for feature purpose with some specific commit
+	dev     : file1commit, file2commit, file3commit
+	master  : file1 commit
+	
+	now if you want to pick file2commit in master branch cherry pick is the best option to do that.
+	
+	git checkout -b master 
+	git cherrypick commitid
+	
+2. git stash?
+    You're working on a new feature in a branch called feature-login, but then you realize that you need to fix a bug in the master branch. 
+    You don't want to commit your current changes yet, so you use git stash to save your work temporarily.
+
+    git stash
+    git stash save "mycurrent changes"
+    git checkout master
+
+	Temporarily saves changes in the working directory to be applied later, without committing them.
+	Saves local modifications (changes in tracked files) and reverts to the last commit.
+3. git rebase ?
+	    Rebase is a process moving or combining sequence of commits to a new base commit
+	let take there is two branches available master and feature, those having two commits. now i need to move feature branch commits into master mean that time we can use 
+git rebase feature master
+
+4. git reset --hard ?
+	Resets the current branch to a specific commit and discards all changes in the working directory and staging area.
+	Completely resets the state of the repository (both staged and working directory) to the specified commit, losing uncommitted changes.
+5. git reset --soft ?
+	Resets the current branch to a specific commit but keeps changes staged (in the index).
+	Resets the branch pointer to a specific commit but preserves changes in the staging area (ready to be committed again).
+	-
